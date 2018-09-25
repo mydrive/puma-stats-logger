@@ -1,0 +1,52 @@
+{
+   "old_workers" : 0,
+   "workers" : 4,
+   "phase" : 0,
+   "booted_workers" : 4,
+   "worker_status" : [
+      {
+         "last_status" : {
+            "running" : 1,
+            "backlog" : 2
+         },
+         "last_checkin" : "2018-09-25T09:19:24Z",
+         "phase" : 0,
+         "pid" : 32579,
+         "booted" : true,
+         "index" : 0
+      },
+      {
+         "last_checkin" : "2018-09-25T09:19:24Z",
+         "phase" : 0,
+         "pid" : 32585,
+         "last_status" : {
+            "backlog" : 0,
+            "running" : 1
+         },
+         "index" : 1,
+         "booted" : true
+      },
+      {
+         "index" : 2,
+         "booted" : true,
+         "last_checkin" : "2018-09-25T09:19:24Z",
+         "phase" : 0,
+         "pid" : 32597,
+         "last_status" : {
+            "backlog" : 0,
+            "running" : 1
+         }
+      },
+      {
+         "booted" : true,
+         "index" : 3,
+         "last_status" : {
+            "running" : 1,
+            "backlog" : 5
+         },
+         "phase" : 0,
+         "last_checkin" : "2018-09-25T09:19:24Z",
+         "pid" : 32611
+      }
+   ]
+}

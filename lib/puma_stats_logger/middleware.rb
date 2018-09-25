@@ -31,12 +31,32 @@ module PumaStatsLogger
       end
 
       stats = JSON.parse(stats.split("\r\n").last)
+
+      stats["total_backlog"] = stats["worker_status"].reduce(0) { |sum, worker| sum + worker["last_status"]["backlog"] }
+      stats["total_running"] = stats["worker_status"].reduce(0) { |sum, worker| sum + worker["last_status"]["running"] }
+      extract_worker_stats!(stats)
+
+      stats.delete("worker_status")
+
       line = String.new.tap do |s|
         s << "source=#{ENV['DYNO']} " if ENV['DYNO']
         s << stats.map{|k,v| "measure#puma.#{k}=#{v}"}.join(' ')
       end
 
       @logger.info line
+    end
+
+    def extract_worker_stats!(stats)
+      stats["worker_status"].each do |worker|
+        index = worker["index"]
+        stats["worker.#{index}.running"] = worker["last_status"]["running"]
+        stats["worker.#{index}.backlog"] = worker["last_status"]["backlog"]
+
+        worker_stats_to_collect = worker.reject { |k, _v| %w[index last_status].include? k }
+        worker_stats_to_collect.map do |k, v|
+          stats["worker.#{index}.#{k}"] = v
+        end
+      end
     end
   end
 end
