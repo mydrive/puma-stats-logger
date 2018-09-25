@@ -21,7 +21,7 @@ module PumaStatsLogger
     end
 
     def puma_state_file
-      'tmp/puma.state'
+      Rails.root.join("tmp", "puma.state")
     end
 
     def log_puma_stats
